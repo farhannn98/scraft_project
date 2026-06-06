@@ -5,6 +5,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import MotionProvider from "../components/MotionProvider";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Scraft Product | Premium Wooden Tableware",
+  title: "Scraft Product ",
   description:
     "Manufacturer and exporter of high-quality wooden kitchenware from Jepara.",
 };
@@ -36,6 +37,7 @@ export default function RootLayout({
         <Navbar />
 
         <MotionProvider>{children}</MotionProvider>
+        <Footer />
       </body>
     </html>
   );

@@ -6,17 +6,24 @@ import { motion, AnimatePresence } from "framer-motion";
 import { products } from "../../data/products";
 import ProductCard from "../../components/ProductCard";
 
+// Memetakan ulang kategori sesuai daftar folder public baru Kamu
 const categories = [
   { id: "all", label: "All Collection" },
-  { id: "tableware", label: "Tableware" },
-  { id: "kitchenware", label: "Kitchenware" },
+  { id: "bathfloor", label: "Bathfloor" },
+  { id: "bathroom", label: "Bathroom" },
+  { id: "coaster", label: "Coaster" },
+  { id: "cutting board", label: "Cutting Board" },
+  { id: "keset", label: "Keset" },
+  { id: "plate", label: "Plate" },
+  { id: "tray", label: "Tray" },
+  { id: "wall decor", label: "Wall Decor" },
 ];
 
 export default function ProductsPage() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Filter produk berdasarkan kategori DAN kata kunci pencarian
+  // Filter produk berdasarkan kategori baru DAN kata kunci pencarian
   const filteredProducts = products.filter((product) => {
     const matchesCategory =
       activeCategory === "all" || product.category === activeCategory;
@@ -44,9 +51,9 @@ export default function ProductsPage() {
           </p>
         </div>
 
-        {/* BARIS PENCARIAN & FILTER */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-12 pb-6 border-b border-stone-200/40">
-          {/* Filter Kategori */}
+        {/* BARIS PENCARIAN & FILTER (DIUBAH BIAR GRUP TOMBOL KATEGORI LEBIH RAPI) */}
+        <div className="flex flex-col gap-6 mb-12 pb-6 border-b border-stone-200/40">
+          {/* Kelompok Filter Tombol Kategori Baru */}
           <div className="flex flex-wrap gap-2">
             {categories.map((cat) => {
               const isSelected = activeCategory === cat.id;
@@ -78,7 +85,7 @@ export default function ProductsPage() {
           </div>
 
           {/* Kotak Pencarian Modern */}
-          <div className="w-full md:w-72">
+          <div className="w-full md:w-72 self-end">
             <input
               type="text"
               placeholder="Search products..."
@@ -89,7 +96,7 @@ export default function ProductsPage() {
           </div>
         </div>
 
-        {/* GRID UTAMA KATALOG (4 KOLOM DESKTOP, 2 KOLOM MOBILE) */}
+        {/* GRID UTAMA KATALOG */}
         {filteredProducts.length > 0 ? (
           <motion.div
             layout
@@ -111,7 +118,6 @@ export default function ProductsPage() {
             </AnimatePresence>
           </motion.div>
         ) : (
-          /* TAMPILAN JIKA PRODUK TIDAK DITEMUKAN */
           <div className="text-center py-20">
             <p className="text-sm font-semibold text-stone-400 italic">
               No products found matching your criteria.

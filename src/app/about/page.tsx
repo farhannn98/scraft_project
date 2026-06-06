@@ -127,9 +127,11 @@ export default function AboutPage() {
               className="relative aspect-[3/4] w-[85%] overflow-hidden rounded-3xl bg-stone-200/60 border border-stone-200/80 p-6 flex flex-col justify-between shadow-md z-10 group"
             >
               <div className="absolute inset-0 bg-gradient-to-t from-stone-900/20 via-transparent to-transparent z-10" />
-              <div className="absolute inset-0 flex items-center justify-center text-stone-400 font-medium text-xs italic bg-stone-200/30 group-hover:scale-105 transition-transform duration-700">
-                [ Photo Placeholder: Teak Serving Board ]
-              </div>
+              <img
+                src="/homeproduct/homeproduct2.jpg"
+                alt="Teak Serving Board"
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
               <span className="relative z-20 text-[8px] font-extrabold uppercase tracking-widest text-amber-800 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-full self-start shadow-sm border border-stone-200/20">
                 Teak Collection
               </span>
@@ -151,9 +153,11 @@ export default function AboutPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="absolute bottom-0 right-0 w-[55%] aspect-square overflow-hidden rounded-2xl bg-stone-100 backdrop-blur-md border border-stone-300/80 p-4 flex flex-col justify-end shadow-xl z-20 group"
             >
-              <div className="absolute inset-0 flex items-center justify-center text-stone-400 font-medium text-[10px] italic bg-stone-200/50 group-hover:scale-105 transition-transform duration-700">
-                [ Photo Placeholder: Detail Texture ]
-              </div>
+              <img
+                src="/homeproduct/homeproduct6.jpg"
+                alt="Teak Serving Board"
+                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
               <div className="relative z-20">
                 <span className="text-[7px] font-extrabold uppercase tracking-widest text-stone-100 bg-stone-950 px-2 py-0.5 rounded shadow-sm">
                   Close Up
