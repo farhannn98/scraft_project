@@ -5,9 +5,11 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { products } from "@/data/products";
+import { useLanguage } from "@/context/LanguageContext"; // FIX: Hubungkan pengatur bahasa global
 
 export default function ProductDetailPage() {
   const params = useParams();
+  const { language } = useLanguage(); // FIX: Ambil status bahasa aktif ("id" / "en")
 
   const product = products.find(
     (p) => p.slug === params.id || p.id === params.id,
@@ -26,16 +28,18 @@ export default function ProductDetailPage() {
     return (
       <main className="min-h-screen bg-stone-50 flex flex-col items-center justify-center text-center px-4 pt-20">
         <h1 className="text-xl font-bold text-stone-900 mb-2">
-          Product Not Found
+          {language === "en" ? "Product Not Found" : "Produk Tidak Ditemukan"}
         </h1>
         <p className="text-xs text-stone-500 mb-6">
-          Produk tidak tersedia atau telah dihapus.
+          {language === "en"
+            ? "The product is unavailable or has been removed."
+            : "Produk tidak tersedia atau telah dihapus."}
         </p>
         <Link
           href="/products"
           className="px-5 py-2.5 text-[10px] font-extrabold uppercase tracking-widest text-white bg-amber-800 rounded-full hover:bg-amber-900 transition-colors"
         >
-          Back to Collection
+          {language === "en" ? "Back to Collection" : "Kembali ke Koleksi"}
         </Link>
       </main>
     );
@@ -46,9 +50,10 @@ export default function ProductDetailPage() {
       ? product.gallery
       : [product.image, product.image, product.image];
 
+  // FIX: Mengonversi pesan teks otomatis WhatsApp agar membaca properti bahasa yang aktif [language]
   const whatsappMessage = encodeURIComponent(
     `Halo Scraft Product, saya ingin berdiskusi atau memesan produk kustom berikut:\n\n` +
-      `Nama Produk: ${product.name}\n` +
+      `Nama Produk: ${product.name[language]}\n` +
       `Material: ${product.material}\n` +
       `Dimensi: ${product.dimensions}\n\n` +
       `Bisa tolong infokan ketersediaan bahan baku atau estimasi waktu produksinya? Terima kasih.`,
@@ -63,15 +68,16 @@ export default function ProductDetailPage() {
             href="/products"
             className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-stone-400 hover:text-amber-800 transition-colors duration-300"
           >
-            <span>←</span> Back to Collection
+            <span>←</span>{" "}
+            {language === "en" ? "Back to Collection" : "Kembali ke Koleksi"}
           </Link>
         </div>
 
         {/* PARALLEL STUDIO GRID */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          {/* SISI KIRI: AREA GALERI FOTO (5 Kolom dari 12) */}
+          {/* SISI KIRI: AREA GALERI FOTO */}
           <div className="lg:col-span-5 flex flex-col md:flex-row gap-4">
-            {/* 1. Gambar Besar Utama (Sekarang di posisi KIRI) */}
+            {/* 1. Gambar Besar Utama */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -84,7 +90,7 @@ export default function ProductDetailPage() {
                 <motion.img
                   key={mainImage}
                   src={mainImage}
-                  alt={product.name}
+                  alt={product.name[language]} // FIX: Pembacaan bahasa
                   initial={{ opacity: 0, scale: 0.98 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.98 }}
@@ -94,7 +100,7 @@ export default function ProductDetailPage() {
               </AnimatePresence>
             </motion.div>
 
-            {/* 2. Tiga Gambar Thumbnail (Sekarang di posisi KANAN foto besar) */}
+            {/* 2. Tiga Gambar Thumbnail */}
             <div className="flex md:flex-col gap-3 overflow-x-auto md:overflow-visible w-full md:w-20 lg:w-24 shrink-0 scrollbar-hide pt-2 md:pt-0">
               {productGallery.slice(0, 3).map((img, idx) => (
                 <motion.div
@@ -110,7 +116,7 @@ export default function ProductDetailPage() {
                 >
                   <img
                     src={img}
-                    alt={`${product.name} thumbnail ${idx}`}
+                    alt={`${product.name[language]} thumbnail ${idx}`} // FIX: Pembacaan bahasa
                     className="w-full h-full object-cover"
                   />
                 </motion.div>
@@ -118,7 +124,7 @@ export default function ProductDetailPage() {
             </div>
           </div>
 
-          {/* SISI KANAN: AREA DETAIL INFORMASI RAPAT SEJAJAR (7 Kolom dari 12) */}
+          {/* SISI KANAN: AREA DETAIL INFORMASI RAPAT SEJAJAR */}
           <motion.div
             initial={{ opacity: 0, x: 15 }}
             animate={{ opacity: 1, x: 0 }}
@@ -130,18 +136,22 @@ export default function ProductDetailPage() {
               <span className="inline-block text-[9px] font-extrabold uppercase tracking-[0.3em] text-amber-800 bg-amber-900/5 px-3 py-1 rounded-full border border-amber-900/10">
                 {product.category}
               </span>
+              {/* FIX: Judul dinamis objek bahasa */}
               <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-stone-950 leading-tight">
-                {product.name}
+                {product.name[language]}
               </h1>
+              {/* FIX: Deskripsi dinamis objek bahasa */}
               <p className="text-xs text-stone-600 leading-relaxed font-medium">
-                {product.description}
+                {product.description[language]}
               </p>
             </div>
 
             {/* Blok Kartu Spesifikasi Minimalis */}
             <div className="bg-stone-100/60 border border-stone-200/80 rounded-2xl p-5 space-y-3 shadow-sm backdrop-blur-sm">
               <h3 className="text-[9px] font-extrabold uppercase tracking-widest text-stone-400 border-b border-stone-200/60 pb-1.5">
-                Craftsmanship Details
+                {language === "en"
+                  ? "Craftsmanship Details"
+                  : "Detail Kerajinan Tangan"}
               </h3>
               <div className="space-y-2.5">
                 <div className="flex justify-between items-baseline text-xs">
@@ -152,7 +162,7 @@ export default function ProductDetailPage() {
                 </div>
                 <div className="flex justify-between items-baseline text-xs">
                   <span className="font-semibold text-stone-400">
-                    Dimensions
+                    {language === "en" ? "Dimensions" : "Dimensi"}
                   </span>
                   <span className="font-bold text-stone-900 text-right">
                     {product.dimensions}
@@ -177,11 +187,14 @@ export default function ProductDetailPage() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center w-full px-6 py-3.5 text-[10px] font-extrabold uppercase tracking-widest text-white bg-stone-950 hover:bg-amber-900 rounded-xl transition-all duration-300 shadow-md shadow-stone-950/10 active:scale-95 text-center cursor-pointer"
               >
-                Inquire & Order Custom ↗
+                {language === "en"
+                  ? "Inquire & Order Custom ↗"
+                  : "Tanyakan & Pesan Kustom ↗"}
               </a>
               <p className="text-[9px] font-medium text-stone-400 text-center tracking-wide">
-                *Produk dibuat handmade oleh pengrajin profesional di Jepara,
-                Jawa Tengah.
+                {language === "en"
+                  ? "*Products are handmade by professional craftsmen in Jepara, Central Java."
+                  : "*Produk dibuat handmade oleh pengrajin profesional di Jepara, Jawa Tengah."}
               </p>
             </div>
           </motion.div>
@@ -228,7 +241,7 @@ export default function ProductDetailPage() {
             >
               <img
                 src={mainImage}
-                alt={product.name}
+                alt={product.name[language]} // FIX: Nama dinamis pada lightbox modal
                 className="w-full h-auto max-h-[90vh] object-contain rounded-2xl border border-stone-800/20 shadow-2xl"
               />
             </motion.div>

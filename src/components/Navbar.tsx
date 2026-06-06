@@ -5,19 +5,22 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-
-const navItems = [
-  { path: "/", label: "Home" },
-  { path: "/products", label: "Products" },
-  { path: "/blog", label: "Blog" },
-  { path: "/about", label: "About Us" },
-  { path: "/contact", label: "Contact" },
-];
+import { useLanguage } from "@/context/LanguageContext"; // Impor provider bahasa
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { language, setLanguage } = useLanguage(); // Gunakan fungsi bahasa global
   const [hoveredPath, setHoveredPath] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState(false);
+
+  // DAFTAR MENU DINAMIS BERDASARKAN BAHASA YANG AKTIF
+  const navItems = [
+    { path: "/", label: language === "en" ? "Home" : "Beranda" },
+    { path: "/products", label: language === "en" ? "Products" : "Produk" },
+    { path: "/blog", label: "Blog" },
+    { path: "/about", label: language === "en" ? "About Us" : "Tentang Kami" },
+    { path: "/contact", label: language === "en" ? "Contact" : "Kontak" },
+  ];
 
   // Kunci scroll layar utama saat menu mobile terbuka
   useEffect(() => {
@@ -41,19 +44,19 @@ export default function Navbar() {
       <header className="fixed top-5 left-0 right-0 w-full z-50 px-4 sm:px-6 max-w-5xl mx-auto">
         {/* CONTAINER KAPSUL UTAMA: GLASSMORPHISM GELAP PREMIUM */}
         <div className="w-full h-14 flex items-center justify-between px-6 bg-stone-900/80 backdrop-blur-xl border border-stone-800/60 rounded-full shadow-[0_12px_40px_rgba(0,0,0,0.16)] relative z-50">
-          {/* LOGO BRAND: MEMAKAI ASET GAMBAR PNG LOGO PUTIH */}
+          {/* LOGO BRAND */}
           <Link href="/" className="flex items-center group h-6 relative z-50">
             <img
               src="/logo/logoscraft.png"
               alt="The Scraft Logo"
               className="h-full w-auto object-contain transition-transform duration-300 group-hover:scale-105"
             />
-            <span className="font-light tracking-[0.2em] text-[15px] sm:text-sm  text-stone-100 hidden sm:block ml-1">
+            <span className="font-light tracking-[0.2em] text-[15px] sm:text-sm text-stone-100 hidden sm:block ml-1">
               THE SCRAFT
             </span>
           </Link>
 
-          {/* NAVIGASI DESKTOP (TEKS DIUBAH JADI TERANG) */}
+          {/* NAVIGASI DESKTOP */}
           <nav className="hidden md:flex items-center space-x-1 relative">
             {navItems.map((item) => {
               const isActive = pathname === item.path;
@@ -77,7 +80,7 @@ export default function Navbar() {
                     />
                   )}
                   <span
-                    className={isActive ? "text-amber-800 font-extrabold" : ""}
+                    className={isActive ? "text-amber-500 font-extrabold" : ""}
                   >
                     {item.label}
                   </span>
@@ -92,19 +95,44 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* TOMBOL AKSI KANAN DESKTOP */}
-          <div className="hidden md:block">
+          {/* TOMBOL AKSI KANAN & SAKELAR BAHASA (ID | EN) */}
+          <div className="hidden md:flex items-center gap-4">
+            {/* SAKELAR BAHASA MINIMALIS */}
+            <div className="flex items-center gap-1.5 text-[9px] font-black tracking-widest text-stone-400 border-r border-stone-800 pr-4 h-4">
+              <button
+                onClick={() => setLanguage("id")}
+                className={`cursor-pointer transition-colors duration-200 ${
+                  language === "id"
+                    ? "text-amber-500 font-black"
+                    : "text-stone-500 hover:text-stone-300"
+                }`}
+              >
+                ID
+              </button>
+              <span className="text-stone-700 font-normal">|</span>
+              <button
+                onClick={() => setLanguage("en")}
+                className={`cursor-pointer transition-colors duration-200 ${
+                  language === "en"
+                    ? "text-amber-500 font-black"
+                    : "text-stone-500 hover:text-stone-300"
+                }`}
+              >
+                EN
+              </button>
+            </div>
+
             <a
               href="https://wa.me/6281234567890?text=Halo%20The%20Scraft,%20saya%20ingin%20bertanya%20seputar%20produk."
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block px-5 py-2 text-[10px] font-extrabold uppercase tracking-widest text-stone-950 bg-stone-100 hover:bg-amber-600 hover:text-white rounded-full transition-all duration-300 shadow-md active:scale-95"
             >
-              Hubungi Kami
+              {language === "en" ? "Contact Us" : "Hubungi Kami"}
             </a>
           </div>
 
-          {/* TOMBOL BURGER MOBILE INTERAKTIF (WARNA GARIS DIUBAH JADI PUTIH) */}
+          {/* TOMBOL BURGER MOBILE INTERAKTIF */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="flex md:hidden flex-col items-center justify-center gap-1.5 w-8 h-8 rounded-full bg-stone-800/50 border border-stone-700/30 active:scale-90 transition-transform cursor-pointer relative z-50"
@@ -174,6 +202,7 @@ export default function Navbar() {
               })}
             </nav>
 
+            {/* BAGIAN BAWAH MENU MOBILE (DITAMBAHKAN SAKELAR BAHASA) */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -181,7 +210,23 @@ export default function Navbar() {
               transition={{ duration: 0.4, delay: 0.4 }}
               className="absolute bottom-12 left-8 right-8 pt-6 border-t border-stone-800 text-[10px] font-extrabold uppercase tracking-[0.2em] text-stone-500 flex justify-between items-center"
             >
-              <span>Jepara Heritage</span>
+              {/* Sakelar Bahasa Mobile */}
+              <div className="flex items-center gap-3 text-xs">
+                <button
+                  onClick={() => setLanguage("id")}
+                  className={`transition-colors ${language === "id" ? "text-amber-500 font-black" : "text-stone-600"}`}
+                >
+                  INDONESIA
+                </button>
+                <span className="text-stone-800">/</span>
+                <button
+                  onClick={() => setLanguage("en")}
+                  className={`transition-colors ${language === "en" ? "text-amber-500 font-black" : "text-stone-600"}`}
+                >
+                  ENGLISH
+                </button>
+              </div>
+
               <a href="https://wa.me/6281234567890" className="text-amber-500">
                 Contact Office ↗
               </a>

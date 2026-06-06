@@ -1,11 +1,13 @@
 // src/types/blog.ts
 export interface Blog {
   id: string;
-  title: string;
   slug: string;
   date: string;
-  category: string; // <-- Tambahkan ini
-  excerpt: string;
-  content: string;
   image: string;
+
+  // FIX: Mengubah tipe data menjadi objek multilingual (Indonesia & Inggris)
+  category: { id: string; en: string };
+  title: { id: string; en: string };
+  excerpt: { id: string; en: string };
+  content: { id: string; en: string };
 }

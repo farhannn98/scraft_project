@@ -3,8 +3,11 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/context/LanguageContext"; // FIX: Hubungkan pengatur bahasa global
 
 export default function AboutPage() {
+  const { language } = useLanguage(); // FIX: Ambil status bahasa aktif
+
   return (
     <main className="relative min-h-screen bg-stone-50 text-stone-900 pt-24 pb-32 px-4 sm:px-6 lg:px-8 selection:bg-amber-900/10 overflow-hidden">
       {/* Elemen Dekoratif Seni - Angka Tahun Samar di Background agar Tidak Polos */}
@@ -20,11 +23,22 @@ export default function AboutPage() {
         {/* 1. HEADER SECTION */}
         <div className="max-w-3xl mb-24 relative pl-6 border-l-2 border-amber-800">
           <span className="text-[10px] font-extrabold uppercase tracking-[0.3em] text-amber-800 block mb-3">
-            Honoring The Roots
+            {language === "en"
+              ? "Honoring The Roots"
+              : "Menghormati Akar Sejarah"}
           </span>
           <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-stone-950 leading-none">
-            Our Story &<br />
-            Philosophy
+            {language === "en" ? (
+              <>
+                Our Story &<br />
+                Philosophy
+              </>
+            ) : (
+              <>
+                Cerita &<br />
+                Filosofi Kami
+              </>
+            )}
           </h1>
         </div>
 
@@ -44,10 +58,9 @@ export default function AboutPage() {
                 “
               </span>
               <p className="text-stone-950 font-bold text-lg sm:text-xl leading-relaxed tracking-wide relative z-10 pl-4">
-                Lahir dari tanah legendaris ukir kayu, Scraft Product membawa
-                dedikasi pengrajin lokal Jepara ke level yang lebih modern. Kami
-                percaya bahwa setiap potong kayu memiliki jiwa dan cerita
-                uniknya sendiri.
+                {language === "en"
+                  ? "Born from the legendary land of wood carving, Scraft Product brings the dedication of local Jepara craftsmen to a more modern level. We believe that every piece of wood has its own unique soul and story."
+                  : "Lahir dari tanah legendaris ukir kayu, Scraft Product membawa dedikasi pengrajin lokal Jepara ke level yang lebih modern. Kami percaya bahwa setiap potong kayu memiliki jiwa dan cerita uniknya sendiri."}
               </p>
             </motion.div>
 
@@ -61,13 +74,14 @@ export default function AboutPage() {
                 className="space-y-3"
               >
                 <h2 className="text-xs font-extrabold uppercase tracking-widest text-amber-800">
-                  01 / The Heritage
+                  {language === "en"
+                    ? "01 / The Heritage"
+                    : "01 / Warisan Budaya"}
                 </h2>
                 <p className="text-xs sm:text-sm">
-                  Setiap guratan serat pada produk kami mencerminkan keahlian
-                  turun-temurun yang diwariskan dari generasi ke generasi di
-                  Jepara. Kami mengawinkan seni pahat tradisional tersebut
-                  dengan estetika fungsional abad modern.
+                  {language === "en"
+                    ? "Every grain on our products reflects the time-honored skills passed down from generation to generation in Jepara. We marry traditional carving artistry with modern functional aesthetics."
+                    : "Setiap guratan serat pada produk kami mencerminkan keahlian turun-temurun yang diwariskan dari generasi ke generasi di Jepara. Kami mengawinkan seni pahat tradisional tersebut dengan estetika fungsional abad modern."}
                 </p>
               </motion.section>
 
@@ -81,15 +95,14 @@ export default function AboutPage() {
                 className="space-y-3"
               >
                 <h2 className="text-xs font-extrabold uppercase tracking-widest text-amber-800">
-                  02 / Sustainability
+                  {language === "en"
+                    ? "02 / Sustainability"
+                    : "02 / Keberlanjutan Alam"}
                 </h2>
                 <p className="text-xs sm:text-sm">
-                  Kami sangat menjaga kelestarian alam. Seluruh bahan baku utama
-                  kami diambil dari kayu jati dan mahoni pilihan yang dikelola
-                  secara legal dan bertanggung jawab melalui sertifikasi resmi.
-                  Sisa potongan produksi diolah kembali secara kreatif menjadi
-                  produk utilitas kecil yang fungsional demi meminimalkan
-                  limbah.
+                  {language === "en"
+                    ? "We hold nature conservation in high regard. All of our primary raw materials are sourced from selected teak and mahogany wood managed legally and responsibly through official certification. Production scraps are creatively reprocessed into small functional utility items to minimize waste."
+                    : "Kami sangat menjaga kelestarian alam. Seluruh bahan baku utama kami diambil dari kayu jati dan mahoni pilihan yang dikelola secara legal dan bertanggung jawab melalui sertifikasi resmi. Sisa potongan produksi diolah kembali secara kreatif menjadi produk utilitas kecil yang fungsional demi meminimalkan limbah."}
                 </p>
               </motion.section>
 
@@ -103,22 +116,22 @@ export default function AboutPage() {
                 className="space-y-3"
               >
                 <h2 className="text-xs font-extrabold uppercase tracking-widest text-amber-800">
-                  03 / Food-Grade Craftsmanship
+                  {language === "en"
+                    ? "03 / Food-Grade Craftsmanship"
+                    : "03 / Keamanan Pangan Manual"}
                 </h2>
                 <p className="text-xs sm:text-sm">
-                  Setiap produk *tableware* dan alat dapur kami melewati proses
-                  pengerjaan manual yang presisi. Tahap akhir *finishing*
-                  menggunakan bahan alami pilihan (seperti *beeswax* dan minyak
-                  nabati) yang menjamin keamanan 100% saat bersentuhan langsung
-                  dengan makanan Anda.
+                  {language === "en"
+                    ? "Each tableware and kitchen utility item undergoes precise manual processing. The final finishing stage utilizes selected natural materials (such as beeswax and vegetable oils) that guarantee 100% safety when in direct contact with your food."
+                    : "Setiap produk tableware dan alat dapur kami melewati proses pengerjaan manual yang presisi. Tahap akhir finishing menggunakan bahan alami pilihan (seperti beeswax dan minyak nabati) yang menjamin keamanan 100% saat bersentuhan langsung dengan makanan Anda."}
                 </p>
               </motion.section>
             </div>
           </div>
 
-          {/* SISI KANAN: Susunan Bingkai Foto Berlapis / Overlapping Collage (5 Kolom) */}
+          {/* SISI KANAN: Susunan Bingkai Foto Berlapis */}
           <div className="lg:col-span-5 w-full relative pt-8 lg:pt-0 min-h-[500px] sm:min-h-[600px]">
-            {/* Foto Utama (Bingkai Besar di Belakang) */}
+            {/* Foto Utama */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -133,19 +146,21 @@ export default function AboutPage() {
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <span className="relative z-20 text-[8px] font-extrabold uppercase tracking-widest text-amber-800 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-full self-start shadow-sm border border-stone-200/20">
-                Teak Collection
+                {language === "en" ? "Teak Collection" : "Koleksi Kayu Jati"}
               </span>
               <div className="relative z-20 text-white drop-shadow-sm">
                 <p className="text-[9px] font-bold uppercase tracking-wider opacity-80">
-                  Premium Quality
+                  {language === "en" ? "Premium Quality" : "Kualitas Premium"}
                 </p>
                 <h3 className="text-xs font-bold tracking-wide">
-                  Solid Teak Wood Tray
+                  {language === "en"
+                    ? "Solid Teak Wood Tray"
+                    : "Nampan Kayu Jati Solid"}
                 </h3>
               </div>
             </motion.div>
 
-            {/* Foto Kedua (Bingkai Kecil Berlapis di Depan Kanan Bawah) */}
+            {/* Foto Kedua */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -160,10 +175,12 @@ export default function AboutPage() {
               />
               <div className="relative z-20">
                 <span className="text-[7px] font-extrabold uppercase tracking-widest text-stone-100 bg-stone-950 px-2 py-0.5 rounded shadow-sm">
-                  Close Up
+                  {language === "en" ? "Close Up" : "Detail Dekat"}
                 </span>
                 <h4 className="text-[10px] font-bold text-stone-900 mt-2 tracking-wide">
-                  Natural Exotic Fiber
+                  {language === "en"
+                    ? "Natural Exotic Fiber"
+                    : "Serat Eksotis Alami"}
                 </h4>
               </div>
             </motion.div>
@@ -177,17 +194,18 @@ export default function AboutPage() {
           viewport={{ once: true }}
           className="p-10 bg-stone-950 border border-stone-800 rounded-3xl text-center relative overflow-hidden shadow-lg"
         >
-          {/* Aksen Kilau Mewah di Dalam Kotak Gelap */}
           <div className="absolute -top-24 -right-24 w-48 h-48 bg-amber-800/10 rounded-full blur-2xl pointer-events-none" />
 
           <div className="relative z-10 max-w-xl mx-auto">
             <h3 className="text-base font-bold text-stone-100 mb-2 tracking-wide">
-              Tertarik Bekerjasama atau Custom Order?
+              {language === "en"
+                ? "Interested in Cooperation or Custom Orders?"
+                : "Tertarik Bekerjasama atau Custom Order?"}
             </h3>
             <p className="text-xs text-stone-400 mb-8 font-medium leading-relaxed">
-              Kami melayani pesanan skala grosir untuk pemenuhan dekorasi
-              interior hotel, kebutuhan peralatan kafe modern, maupun komoditas
-              ekspor.
+              {language === "en"
+                ? "We serve wholesale orders for hotel interior decoration, modern cafe equipment requirements, and export commodities."
+                : "Kami melayani pesanan skala grosir untuk pemenuhan dekorasi interior hotel, kebutuhan peralatan kafe modern, maupun komoditas ekspor."}
             </p>
             <a
               href="https://wa.me/6281234567890"
@@ -195,7 +213,7 @@ export default function AboutPage() {
               rel="noopener noreferrer"
               className="inline-block px-8 py-3.5 text-[10px] font-extrabold uppercase tracking-widest text-stone-950 bg-stone-100 hover:bg-amber-700 hover:text-white rounded-xl transition-all duration-300 shadow-md active:scale-95 cursor-pointer"
             >
-              Contact Our Team
+              {language === "en" ? "Contact Our Team" : "Hubungi Tim Kami"}
             </a>
           </div>
         </motion.div>

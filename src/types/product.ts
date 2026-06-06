@@ -1,23 +1,21 @@
 // src/types/product.ts
 export interface Product {
   id: string;
-  name: string;
+  name: { id: string; en: string }; // FIX: Objek bahasa
   slug: string;
   category:
     | "bathfloor"
     | "bathroom"
     | "coaster"
     | "cutting board"
-    | "keset"
+    | "mat"
     | "plate"
     | "tray"
-    | "wall decor";
-  description: string;
-  material: string; // Contoh: Teak Wood (Kayu Jati), Mahogany, dll.
-  finish: string; // Contoh: Food Grade Beeswax, Natural Oil
-  dimensions: string; // Contoh: 25cm x 15cm x 2cm
-  image: string; // Jalur file foto utama langsung mengarah ke sub-folder di public/
-
-  // FIX TOTAL: Tambahkan baris ini agar array gambar pendukung legal di TypeScript
-  gallery?: string[]; // Menggunakan tanda '?' artinya opsional, jadi kalau ada produk yang belum punya galeri tidak akan error
+    | "wall decor"; // Tetap string literal sebagai ID filter sistem
+  description: { id: string; en: string }; // FIX: Objek bahasa
+  material: string;
+  finish: string;
+  dimensions: string;
+  image: string;
+  gallery?: string[];
 }

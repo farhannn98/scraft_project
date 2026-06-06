@@ -5,31 +5,71 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { products } from "../../data/products";
 import ProductCard from "../../components/ProductCard";
-
-// Memetakan ulang kategori sesuai daftar folder public baru Kamu
-const categories = [
-  { id: "all", label: "All Collection" },
-  { id: "bathfloor", label: "Bathfloor" },
-  { id: "bathroom", label: "Bathroom" },
-  { id: "coaster", label: "Coaster" },
-  { id: "cutting board", label: "Cutting Board" },
-  { id: "keset", label: "Keset" },
-  { id: "plate", label: "Plate" },
-  { id: "tray", label: "Tray" },
-  { id: "wall decor", label: "Wall Decor" },
-];
+import { useLanguage } from "@/context/LanguageContext"; // FIX: Impor bahasa global
 
 export default function ProductsPage() {
+  const { language } = useLanguage(); // FIX: Ambil status bahasa aktif
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Filter produk berdasarkan kategori baru DAN kata kunci pencarian
+  // Kategori Dinamis
+  const categories = [
+    {
+      id: "all",
+      label: language === "en" ? "All Collection" : "Semua Koleksi",
+    },
+    {
+      id: "bathfloor",
+      label: language === "en" ? "Bathfloor" : "Alas Lantai Kamar Mandi",
+    },
+    {
+      id: "bathroom",
+      label: language === "en" ? "Bathroom Amenities" : "Perkakas Kamar Mandi",
+    },
+    {
+      id: "coaster",
+      label: language === "en" ? "Coaster" : "Tatakan Gelas",
+    },
+    {
+      id: "cutting board",
+      label: language === "en" ? "Cutting Board" : "Talenan",
+    },
+    {
+      id: "mat",
+      label: language === "en" ? "Mat" : "Keset",
+    },
+    {
+      id: "plate",
+      label: language === "en" ? "Plate" : "Piring",
+    },
+    {
+      id: "tray",
+      label: language === "en" ? "Tray" : "Nampan Saji",
+    },
+    {
+      id: "wall decor",
+      label: language === "en" ? "Wall Decor" : "Hiasan Dinding",
+    },
+  ];
+
+  // Filter produk berdasarkan kategori dan teks pencarian dinamis
   const filteredProducts = products.filter((product) => {
     const matchesCategory =
       activeCategory === "all" || product.category === activeCategory;
+    console.log(
+      "Tombol Aktif:",
+      activeCategory,
+      "Kategori Produk:",
+      product.category,
+    );
+
+    // FIX: Ubah pencarian agar membaca properti objek bahasa baru kamu [language]
     const matchesSearch =
-      product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.name[language]
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase()) ||
       product.material.toLowerCase().includes(searchQuery.toLowerCase());
+
     return matchesCategory && matchesSearch;
   });
 
@@ -42,18 +82,20 @@ export default function ProductsPage() {
             The Scraft Registry
           </span>
           <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-stone-950 mb-4">
-            Our Complete Collection
+            {language === "en"
+              ? "Our Complete Collection"
+              : "Koleksi Lengkap Kami"}
           </h1>
           <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-medium">
-            Jelajahi seluruh hasil karya terbaik pengrajin Jepara. Setiap produk
-            dibuat secara manual dengan ketelitian tinggi untuk memastikan
-            kualitas ekspor yang sempurna.
+            {language === "en"
+              ? "Explore the entire masterpiece collection of Jepara craftsmen. Each product is manually crafted with high precision to ensure perfect export quality."
+              : "Jelajahi seluruh hasil karya terbaik pengrajin Jepara. Setiap produk dibuat secara manual dengan ketelitian tinggi untuk memastikan kualitas ekspor yang sempurna."}
           </p>
         </div>
 
-        {/* BARIS PENCARIAN & FILTER (DIUBAH BIAR GRUP TOMBOL KATEGORI LEBIH RAPI) */}
+        {/* BARIS PENCARIAN & FILTER */}
         <div className="flex flex-col gap-6 mb-12 pb-6 border-b border-stone-200/40">
-          {/* Kelompok Filter Tombol Kategori Baru */}
+          {/* Kelompok Filter Tombol Kategori */}
           <div className="flex flex-wrap gap-2">
             {categories.map((cat) => {
               const isSelected = activeCategory === cat.id;
@@ -88,7 +130,9 @@ export default function ProductsPage() {
           <div className="w-full md:w-72 self-end">
             <input
               type="text"
-              placeholder="Search products..."
+              placeholder={
+                language === "en" ? "Search products..." : "Cari produk..."
+              }
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full px-4 py-2 text-xs font-medium bg-stone-200/40 border border-stone-200/60 rounded-full focus:outline-none focus:border-amber-800/40 focus:bg-stone-100 transition-all duration-300 placeholder-stone-400"
@@ -120,7 +164,9 @@ export default function ProductsPage() {
         ) : (
           <div className="text-center py-20">
             <p className="text-sm font-semibold text-stone-400 italic">
-              No products found matching your criteria.
+              {language === "en"
+                ? "No products found matching your criteria."
+                : "Produk tidak ditemukan sesuai kriteria Anda."}
             </p>
           </div>
         )}

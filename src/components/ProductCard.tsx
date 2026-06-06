@@ -1,15 +1,18 @@
+// src/components/ProductCard.tsx
 "use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Product } from "@/types/product";
+import { useLanguage } from "@/context/LanguageContext"; // FIX: Impor bahasa global
 
 interface ProductCardProps {
   product: Product;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const { language } = useLanguage(); // FIX: Ambil status bahasa aktif
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   return (
@@ -30,7 +33,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           <div className="absolute inset-0 z-10 bg-gradient-to-t from-stone-100/30 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           <img
             src={product.image}
-            alt={product.name}
+            alt={product.name[language]} // FIX: Nama dinamis untuk alternatif gambar
             className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
           <span className="absolute top-4 left-4 z-20 rounded-full bg-stone-100/90 backdrop-blur-md px-3 py-1 text-[9px] font-extrabold uppercase tracking-widest text-amber-800 border border-stone-200/60 shadow-sm">
@@ -43,11 +46,13 @@ export default function ProductCard({ product }: ProductCardProps) {
           <span className="text-[9px] font-extrabold uppercase tracking-widest text-stone-400 mb-1.5 block">
             {product.dimensions}
           </span>
+          {/* FIX: Nama dinamis */}
           <h3 className="text-sm font-bold tracking-wide text-stone-950 group-hover:text-amber-800 transition-colors duration-300 line-clamp-1">
-            {product.name}
+            {product.name[language]}
           </h3>
+          {/* FIX: Deskripsi dinamis */}
           <p className="mt-2 text-xs text-stone-600 line-clamp-2 leading-relaxed font-medium">
-            {product.description}
+            {product.description[language]}
           </p>
           <div className="mt-5 pt-4 border-t border-stone-200/60 flex items-center justify-between">
             <span className="text-[10px] font-bold uppercase tracking-wider text-amber-800/70 bg-amber-900/5 px-2 py-0.5 rounded-md border border-amber-900/5">
@@ -57,7 +62,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               href={`/products/${product.slug}`}
               className="text-[10px] font-extrabold uppercase tracking-widest text-stone-950 hover:text-amber-800 flex items-center gap-1.5 transition-colors duration-300"
             >
-              Details
+              {language === "en" ? "Details" : "Detail"}
               <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
                 →
               </span>
@@ -66,7 +71,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
       </motion.div>
 
-      {/* LIGHTBOX MODAL WITH CLOSE ICON */}
+      {/* LIGHTBOX MODAL */}
       <AnimatePresence>
         {isLightboxOpen && (
           <motion.div
@@ -76,7 +81,6 @@ export default function ProductCard({ product }: ProductCardProps) {
             onClick={() => setIsLightboxOpen(false)}
             className="fixed inset-0 z-50 flex flex-center justify-center bg-stone-950/85 backdrop-blur-md p-4 cursor-zoom-out items-center"
           >
-            {/* Tombol Close Terapung Elit di Kanan Atas Layar */}
             <button
               onClick={() => setIsLightboxOpen(false)}
               className="absolute top-6 right-6 z-50 p-2 rounded-full bg-stone-900/80 border border-stone-800 text-stone-400 hover:text-white transition-colors duration-200 shadow-xl cursor-pointer"
@@ -107,7 +111,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             >
               <img
                 src={product.image}
-                alt={product.name}
+                alt={product.name[language]} // FIX: Nama dinamis di dalam modal lightbox
                 className="w-full h-auto max-h-[92vh] object-contain rounded-2xl shadow-2xl border border-stone-800/30"
               />
             </motion.div>
