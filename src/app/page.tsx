@@ -18,14 +18,42 @@ export default function HomePage() {
       id: "all",
       label: language === "en" ? "All Collection" : "Semua Koleksi",
     },
-    { id: "bathfloor", label: "Bathfloor" },
-    { id: "bathroom", label: "Bathroom" },
-    { id: "coaster", label: "Coaster" },
-    { id: "cutting board", label: "Cutting Board" },
-    { id: "mat", label: "Mat" },
-    { id: "plate", label: "Plate" },
-    { id: "tray", label: "Tray" },
-    { id: "wall decor", label: "Wall Decor" },
+    {
+      id: "bathfloor",
+      label: language === "en" ? "Bathfloor" : "Alas Lantai",
+    },
+    {
+      id: "bathroom",
+      label: language === "en" ? "Bathroom" : "Perkakas Mandi",
+    },
+    {
+      id: "coaster",
+      label: language === "en" ? "Coaster" : "Tatakan Gelas",
+    },
+    {
+      id: "cutting board",
+      label: language === "en" ? "Cutting Board" : "Talenan",
+    },
+    {
+      id: "mat",
+      label: language === "en" ? "Mat" : "Keset",
+    },
+    {
+      id: "plate",
+      label: language === "en" ? "Plate" : "Piring",
+    },
+    {
+      id: "tray",
+      label: language === "en" ? "Tray" : "Nampan Saji",
+    },
+    {
+      id: "wall decor",
+      label: language === "en" ? "Wall Decor" : "Hiasan Dinding",
+    },
+    {
+      id: "end-grain-cutting-board",
+      label: language === "en" ? "End Grain" : "Talenan End Grain",
+    },
   ];
 
   const filteredProducts = products.filter((product) => {

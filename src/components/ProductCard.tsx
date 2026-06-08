@@ -15,6 +15,21 @@ export default function ProductCard({ product }: ProductCardProps) {
   const { language } = useLanguage(); // FIX: Ambil status bahasa aktif
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
+  // FIX: Kamus lokalisasi data kategori produk agar sinkron dua bahasa
+  const categoryMap: Record<string, string> = {
+    all: language === "en" ? "All Collection" : "Semua Koleksi",
+    bathfloor: language === "en" ? "Bathfloor" : "Alas Lantai",
+    bathroom: language === "en" ? "Bathroom" : "Perkakas Mandi",
+    coaster: language === "en" ? "Coaster" : "Tatakan Gelas",
+    "cutting board": language === "en" ? "Cutting Board" : "Talenan",
+    mat: language === "en" ? "Mat" : "Keset",
+    plate: language === "en" ? "Plate" : "Piring",
+    tray: language === "en" ? "Tray" : "Nampan Saji",
+    "wall decor": language === "en" ? "Wall Decor" : "Hiasan Dinding",
+    "end-grain-cutting-board":
+      language === "en" ? "End Grain" : "Talenan End Grain",
+  };
+
   return (
     <>
       <motion.div
@@ -36,8 +51,9 @@ export default function ProductCard({ product }: ProductCardProps) {
             alt={product.name[language]} // FIX: Nama dinamis untuk alternatif gambar
             className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
+          {/* FIX: Ambil nama kategori terjemahan dari kamus categoryMap */}
           <span className="absolute top-4 left-4 z-20 rounded-full bg-stone-100/90 backdrop-blur-md px-3 py-1 text-[9px] font-extrabold uppercase tracking-widest text-amber-800 border border-stone-200/60 shadow-sm">
-            {product.category}
+            {categoryMap[product.category] || product.category}
           </span>
         </div>
 
