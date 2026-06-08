@@ -8,6 +8,7 @@ export interface Product {
     | "bathroom"
     | "coaster"
     | "cutting board"
+    | "end grain cutting board"
     | "mat"
     | "plate"
     | "tray"

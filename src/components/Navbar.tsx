@@ -123,7 +123,7 @@ export default function Navbar() {
             </div>
 
             <a
-              href="https://wa.me/6281234567890?text=Halo%20The%20Scraft,%20saya%20ingin%20bertanya%20seputar%20produk."
+              href="https://wa.me/6285600614431?text=Halo%20The%20Scraft,%20saya%20ingin%20bertanya%20seputar%20produk."
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block px-5 py-2 text-[10px] font-extrabold uppercase tracking-widest text-stone-950 bg-stone-100 hover:bg-amber-600 hover:text-white rounded-full transition-all duration-300 shadow-md active:scale-95"

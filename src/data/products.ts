@@ -142,6 +142,71 @@ export const products: Product[] = [
     ],
   },
 
+  {
+    id: "cb-2",
+    name: {
+      id: "Talenan Masak End-Grain",
+      en: "End-Grain Cutting Board",
+    },
+    slug: "talenan-masak-end-grain1",
+    category: "cutting board",
+    description: {
+      id: "Talenan potong tebal profesional yang ramah terhadap mata pisau dapur Anda.",
+      en: "Professional thick cutting board that is gentle on your kitchen knife blades.",
+    },
+    material: "Teak Wood",
+    finish: "Food Grade Mineral Oil",
+    dimensions: "40cm x 25cm x 3cm",
+    image: "/cuttingboard2/cuttingboard2.3.png",
+    gallery: [
+      "/cuttingboard2/cuttingboard2.1.jpg",
+      "/cuttingboard2/cuttingboard2.2.jpg",
+      "/cuttingboard2/cuttingboard2.4.jpg",
+    ],
+  },
+
+  {
+    id: "cb-3",
+    name: {
+      id: "Talenan Masak End-Grain",
+      en: "End-Grain Cutting Board",
+    },
+    slug: "talenan-masak-end-grain2",
+    category: "cutting board",
+    description: {
+      id: "Talenan potong tebal profesional yang ramah terhadap mata pisau dapur Anda.",
+      en: "Professional thick cutting board that is gentle on your kitchen knife blades.",
+    },
+    material: "Teak Wood",
+    finish: "Food Grade Mineral Oil",
+    dimensions: "40cm x 25cm x 3cm",
+    image: "/cuttingboard3/egcb1.1.jpeg",
+    gallery: [
+      "/cuttingboard3/egcb1.2.jpeg",
+      "/cuttingboard3/egcb1.3.jpeg",
+      "/cuttingboard3/egcb1.4.jpeg",
+    ],
+  },
+
+  {
+    id: "cb-4",
+    name: {
+      id: "Talenan Masak End-Grain",
+      en: "End-Grain Cutting Board",
+    },
+    slug: "talenan-masak-end-grain3",
+    category: "cutting board",
+    description: {
+      id: "Talenan potong tebal profesional yang ramah terhadap mata pisau dapur Anda.",
+      en: "Professional thick cutting board that is gentle on your kitchen knife blades.",
+    },
+    material: "Teak Wood",
+    finish: "Food Grade Mineral Oil",
+    dimensions: "40cm x 25cm x 3cm",
+    image: "/cuttingboard3/egcb2.1.jpeg",
+    gallery: ["/cuttingboard3/egcb2.2.jpeg", "/cuttingboard3/egcb2.3.jpeg"],
+  },
+
   // 5. KATEGORI: KESET
   {
     id: "ks-1",

@@ -103,7 +103,7 @@ export default function Footer() {
                   href="mailto:hello@scraftproduct.com"
                   className="hover:text-amber-400 transition-colors"
                 >
-                  hello@scraftproduct.com
+                  @scraft.ina@gmail.com
                 </a>
               </li>
               <li className="flex flex-col gap-0.5">
@@ -111,10 +111,10 @@ export default function Footer() {
                   WhatsApp Business
                 </span>
                 <a
-                  href="https://wa.me/6281234567890"
+                  href="https://wa.me/6285600614431"
                   className="hover:text-amber-400 transition-colors"
                 >
-                  +62 812-3456-7890
+                  +62 856-0061-4431
                 </a>
               </li>
               {/* FIX: Alamat Kantor PT Semarang */}

@@ -73,7 +73,7 @@ export default function ContactPage() {
             </div>
 
             <a
-              href={`https://wa.me/6281234567890?text=${quickInquiryMessage}`}
+              href={`https://wa.me/6285600614431?text=${quickInquiryMessage}`}
               target="_blank"
               rel="noopener noreferrer"
               className="relative z-10 inline-flex items-center justify-between w-full sm:w-auto px-8 py-4 bg-stone-100 hover:bg-amber-600 hover:text-white text-stone-950 rounded-2xl transition-all duration-300 font-extrabold text-[11px] uppercase tracking-widest shadow-md active:scale-95"
@@ -123,10 +123,10 @@ export default function ContactPage() {
               {language === "en" ? "Business Email" : "Email Bisnis"}
             </h3>
             <a
-              href="mailto:hello@scraftproduct.com"
+              href="mailto:scraft.ina@gmail.com"
               className="text-sm font-bold text-stone-900 hover:text-amber-800 transition-colors break-all"
             >
-              hello@scraftproduct.com
+              scraft.ina@gmail.com
             </a>
           </motion.div>
 
