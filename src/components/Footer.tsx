@@ -23,8 +23,8 @@ export default function Footer() {
             </Link>
             <p className="text-xs text-stone-400 leading-relaxed font-medium mb-6 pe-4">
               {language === "en"
-                ? "Bringing the organic beauty of authentic Jepara wood grain into your modern dining room and kitchen spaces. Crafted slowly, enjoyed forever."
-                : "Menghadirkan keindahan organik serat kayu asli Jepara ke dalam ruang makan dan dapur modern Anda. Dibuat lambat, dinikmati selamanya."}
+                ? "Bringing the organic beauty of authentic Jepara wood grain into your modern dining room and kitchen. Crafted with care, to be enjoyed forever."
+                : "Menghadirkan keindahan organik serat kayu asli Jepara ke dalam ruang makan dan dapur modern Anda. Dibuat dengan penuh ketelitian, untuk dinikmati selamanya."}
             </p>
             <div className="flex gap-4 text-[10px] font-extrabold uppercase tracking-widest text-stone-500">
               <a
