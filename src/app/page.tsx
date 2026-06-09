@@ -200,15 +200,15 @@ export default function HomePage() {
             <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-stone-950 leading-tight">
               {language === "en" ? (
                 <>
-                  Craft Slowly,
+                  Meticulously Crafted
                   <br />
-                  Enjoyed Forever.
+                  Lasted For A Long Time
                 </>
               ) : (
                 <>
-                  Dibuat Lambat,
+                  Dibuat dengan Ketelitian dan ,
                   <br />
-                  Dinikmati Selamanya.
+                  Daya Tahan yang Prima
                 </>
               )}
             </h2>
